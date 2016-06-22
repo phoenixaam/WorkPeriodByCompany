@@ -1,0 +1,18 @@
+<apex:page id="WorkPeriodByCompany" controller="WorkPeriodByCompanyController">
+    <apex:form >
+        <apex:pageBlock title="Work period by Company">
+            <apex:pageBlockSection columns="{!companiesCount}">
+                <apex:pageBlockTable value="{!workPeriods}" var="p">
+                    <apex:column value="{!p.Name}"/>
+                    <apex:repeat var="c" value="{!companies}">
+                        <apex:column headerValue="{!c}">
+                            <apex:outputText value="{!IF(p.Order__r.Account__r.Name==c, 'Revenue:'+Text(p.Rate__r.Customer_Rate__c), '')}"/>
+                            <apex:outputText value=" "/>
+                            <apex:outputText value="{!IF(p.Order__r.Account__r.Name==c, 'Margin:'+Text(p.Rate__r.Employer_Rate__c), '')}"/>
+                        </apex:column>
+                    </apex:repeat>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
